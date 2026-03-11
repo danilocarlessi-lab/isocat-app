@@ -1,0 +1,101 @@
+{
+    "name": "ISOCAT — Orçamentos",
+    "short_name": "ISOCAT",
+    "description": "Calculadora de orçamentos de isopor — ISOCAT Catanduva",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#0F0F0F",
+    "theme_color": "#1C1C1C",
+    "orientation": "portrait",
+    "icons": [
+          {
+                  "src": "icon-192.png",
+                  "sizes": "192x192",
+                  "type": "image/png",
+                  "purpose": "any maskable"
+          },
+          {
+                  "src": "icon-512.png",
+                  "sizes": "512x512",
+               { 
+                ""tnyapmee""::  ""iImSaOgCeA/Tp n— gO"r,ç
+            a m e n t o s""p,u
+            r p o"sseh"o:r t"_annaym em"a:s k"aIbSlOeC"A
+      T " , 
+          } 
+      " d e]s,c
+  r i p"tciaotne"g:o r"iCeasl"c:u l[a"dboursai ndees so"r,ça m"eunttiolsi tdiee si"s]o,p
+  o r  "—l aInSgO"C:A T" pCta-tBaRn"d
+u}va",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0F0F0F",
+  "theme_color": "#1C1C1C",
+  "orientation": "portrait",
+  "icons": [
+        {
+                "src": "icon-192.png",
+                "sizes": "192x192",
+                "type": "image/png",
+                "purpose": "any maskable"
+        },
+        {
+                "src": "icon-512.png",
+                "sizes": "512x512",
+                "type": "image/png",
+                "purpose": "any maskable"
+        }
+  ],
+  "categories": ["business", "utilities"],
+  "lang": "pt-BR"
+}{
+        "name": "ISOCAT — Orçamentos",
+  "short_name": "ISOCAT",
+    "description": "Calculadora de orçamentos de isopor — ISOCAT Catanduva"{,
+
+      ""nsatmaer"t:_ u"rIlS"O:C A"T/ "—, 
+  O r ça"mdeinstpolsa"y,"
+:   ""ssthaonrdta_lnoanmee"",:
+    " I"SbOaCcAkTg"r,o
+  u n d"_dceoslcorri"p:t i"o#n0"F:0 F"0CFa"l,c
+  u l a"dtohream ed_ec oolroçra"m:e n"t#o1sC 1dCe1 Ci"s,o
+  p o r" o— rIiSeOnCtAaTt iCoant"a:n d"upvoar"t,r
+  a i t""s,t
+  a r t"_iucroln"s:" :" /["
+, 
+       "{d
+  i s p l a y "":s r"cs"t:a n"diacloonn-e1"9,2
+  . p n"gb"a,c
+  k g r o u n d"_sciozleosr""::  ""1#902Fx01F902F"",,
+
+       " t h e"mtey_pceo"l:o r""i:m a"g#e1/Cp1nCg1"C,"
+  , 
+       " o r"ipeunrtpaotsieo"n:" :" a"npyo rmtarsakiatb"l,e
+  " 
+    " i c o}n,s
+" :   [ 
+          { 
+        { 
+      " s r c "":s r"ci"c:o n"-i5c1o2n.-p1n9g2".,p
+  n g " , 
+                " s i z e"ss"i:z e"s5"1:2 x"511922"x,1
+            9 2 " , 
+                " t y p e""t:y p"ei"m:a g"ei/mpangge"/,p
+  n g " , 
+                " p u r p"opsuer"p:o s"ea"n:y  "maansyk ambalsek"a
+            b l e " 
+          } 
+]},,
+
+    " c a{t
+e g o r i e s""s:r c["":b u"siicnoens-s5"1,2 ."puntgi"l,i
+  t i e s " ] ,"
+  s i z"elsa"n:g "":5 1"2pxt5-1B2R"",
+
+  }      "type": "image/png",
+        "purpose": "any maskable"
+  }
+],
+        "categories": ["business", "utilities"],
+        "lang": "pt-BR"
+          }
