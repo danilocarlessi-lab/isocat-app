@@ -1,1 +1,119 @@
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
+<title>ISOCAT — Orçamentos</title>
+<meta name="theme-color" content="#1C1C1C"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-title" content="ISOCAT"/>
+<link rel="manifest" href="manifest.json"/>
+<link rel="apple-touch-icon" href="icon-192.png"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{--bg:#0F0F0F;--surface:#1A1A1A;--surface2:#242424;--border:#2E2E2E;--orange:#F07020;--green:#2DBF6E;--blue:#5B9CF6;--text:#F0EDE8;--muted:#888;--input-bg:#222;--radius:14px;--radius-sm:8px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overscroll-behavior:none}
+.header{background:var(--surface);border-bottom:2px solid var(--orange);padding:16px 16px 12px;position:sticky;top:0;z-index:100}
+.header-top{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:40px;height:40px;background:var(--orange);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:20px}
+.logo-name{font-size:18px;font-weight:800;color:#fff}
+.logo-sub{font-size:10px;color:var(--muted);letter-spacing:2px;text-transform:uppercase}
+.btn-hist{background:var(--surface2);border:1px solid var(--border);color:var(--muted);font-family:'Sora',sans-serif;font-size:11px;padding:8px 12px;border-radius:var(--radius-sm);cursor:pointer}
+.config-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.config-label{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
+.config-input{background:var(--input-bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:15px;font-weight:500;padding:9px 12px;width:100%;-webkit-appearance:none}
+.config-input.green{border-color:#2DBF6E44;color:var(--green)}
+.cliente-wrap{padding:12px 16px 0}
+.field-label{font-size:10px;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}
+.field-input{background:var(--input-bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'Sora',sans-serif;font-size:14px;padding:10px 14px;width:100%;-webkit-appearance:none}
+.pecas-section{padding:12px 16px 0}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.section-title{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.btn-add{background:var(--orange);color:#fff;border:none;border-radius:var(--radius-sm);font-family:'Sora',sans-serif;font-size:13px;font-weight:600;padding:8px 16px;cursor:pointer}
+.peca-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px;animation:slideIn .2s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+.peca-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.peca-num{font-family:'DM Mono',monospace;font-size:11px;color:var(--orange);background:#F0702018;border:1px solid #F0702030;border-radius:6px;padding:3px 8px}
+.btn-remove{background:none;border:1px solid #FF444420;color:#FF6666;border-radius:6px;width:28px;height:28px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.peca-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
+.peca-row.three{grid-template-columns:1fr 1fr 1fr}
+.peca-field{display:flex;flex-direction:column;gap:4px}
+.peca-label{font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase}
+.peca-input{background:var(--input-bg);border:1.5px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:16px;font-weight:500;padding:10px 12px;width:100%;-webkit-appearance:none}
+.peca-input.dim{border-color:#5B9CF620;color:var(--blue)}
+.peca-result{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;margin-top:4px;display:flex;align-items:center;justify-content:space-between}
+.peca-result-vol{font-family:'DM Mono',monospace;font-size:11px;color:var(--blue)}
+.peca-result-preco{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--green)}
+.totais-section{padding:16px 16px 0}
+.totais-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:10px}
+.total-row{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border)}
+.total-row:last-child{border-bottom:none}
+.total-row.highlight{background:#F0702010}
+.total-row.venda{background:#2DBF6E10}
+.total-label{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--muted)}
+.total-val{font-family:'DM Mono',monospace;font-size:18px;font-weight:500}
+.total-val.orange{color:var(--orange)}
+.total-val.green{color:var(--green)}
+.total-val.blue{color:var(--blue);font-size:14px}
+.actions-section{padding:12px 16px 8px;display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-action{border:none;border-radius:var(--radius);font-family:'Sora',sans-serif;font-size:13px;font-weight:600;padding:14px;cursor:pointer}
+.btn-salvar{background:var(--orange);color:#fff}
+.btn-limpar{background:var(--surface2);border:1px solid var(--border);color:var(--muted)}
+.modal-overlay{position:fixed;inset:0;background:#000000CC;z-index:200;display:flex;flex-direction:column;animation:fadeIn .2s ease}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.modal{background:var(--bg);border-top:2px solid var(--orange);border-radius:20px 20px 0 0;margin-top:auto;max-height:80vh;overflow-y:auto;padding:20px 16px 40px;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(40px);opacity:0}to{transform:translateY(0);opacity:1}}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.modal-title{font-size:16px;font-weight:700}
+.btn-close{background:var(--surface2);border:none;color:var(--muted);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center}
+.hist-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:8px}
+.hist-cliente{font-size:14px;font-weight:600}
+.hist-meta{font-size:11px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace}
+.hist-preco{font-size:16px;font-weight:500;color:var(--green);font-family:'DM Mono',monospace;margin-top:6px}
+.empty-hist{text-align:center;padding:40px 20px;color:var(--muted);font-size:14px}
+.footer{padding:16px;text-align:center;font-size:10px;color:#444;letter-spacing:1px;text-transform:uppercase}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;font-size:13px;font-weight:600;padding:12px 24px;border-radius:100px;z-index:300;white-space:nowrap;animation:toastIn .3s ease,toastOut .3s ease 2s forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(-50%) translateY(10px)}}
+@keyframes toastOut{to{opacity:0;transform:translateX(-50%) translateY(10px)}}
+</style>
+</head>
+<body>
+<header class="header">
+<div class="header-top">
+<div class="logo"><div class="logo-icon">&#129482;</div><div><div class="logo-name">ISOCAT</div><div class="logo-sub">Or&#231;amentos</div></div></div>
+<button class="btn-hist" onclick="abrirHistorico()">&#128203; Hist&#243;rico</button>
+</div>
+<div class="config-bar">
+<div><div class="config-label">Custo/m&#179; (R$)</div><input id="custo" class="config-input" type="number" value="190" step="1" inputmode="decimal"/></div>
+<div><div class="config-label">Margem (%)</div><input id="margem" class="config-input green" type="number" value="0" step="1" inputmode="decimal"/></div>
+</div>
+</header>
+<div class="cliente-wrap"><div class="field-label">Cliente</div><input id="cliente" class="field-input" type="text" placeholder="Nome do cliente"/></div>
+<div class="pecas-section"><div class="section-header"><div class="section-title">Pe&#231;as</div><button class="btn-add" onclick="addPeca()">+ Pe&#231;a</button></div><div id="pecas-container"></div></div>
+<div class="totais-section"><div class="totais-card"><div class="total-row"><div class="total-label">Volume Total</div><div class="total-val blue" id="total-vol">0.000000 m&#179;</div></div><div class="total-row highlight"><div class="total-label">Custo Total</div><div class="total-val orange" id="total-custo">R$ 0,00</div></div><div class="total-row venda"><div class="total-label" id="label-venda">Pre&#231;o de Venda</div><div class="total-val green" id="total-venda">R$ 0,00</div></div></div></div>
+<div class="actions-section"><button class="btn-action btn-salvar" onclick="salvarOrcamento()">&#128190; Salvar</button><button class="btn-action btn-limpar" onclick="limpar()">&#128465; Limpar</button></div>
+<div class="footer">ISOCAT &#183; Catanduva, SP &#183; 37 anos de mercado</div>
+<div class="modal-overlay" id="modal-hist" style="display:none" onclick="fecharHistorico(event)"><div class="modal" onclick="event.stopPropagation()"><div class="modal-header"><div class="modal-title">&#128203; Hist&#243;rico</div><button class="btn-close" onclick="fecharHistorico()">&#215;</button></div><div id="hist-lista"></div></div></div>
+<script>
+let pecas=[],idSeq=1;
+function addPeca(){const id=idSeq++;pecas.push({id,codigo:'',descr:'',quant:1,alt:'',larg:'',esp:''});renderPecas();setTimeout(()=>{const c=document.querySelectorAll('.peca-card');if(c.length)c[c.length-1].scrollIntoView({behavior:'smooth',block:'center'})},50)}
+function removePeca(id){pecas=pecas.filter(p=>p.id!==id);renderPecas();calcTotais()}
+function updatePeca(id,f,v){const p=pecas.find(p=>p.id===id);if(p){p[f]=v;calcTotais()}}
+function calcVol(p){const a=parseFloat(p.alt)||0,l=parseFloat(p.larg)||0,e=parseFloat(p.esp)||0;if(!a||!l||!e)return 0;return((e+5)/1000)*((l+5)/1000)*((a+2)/1000)}
+function fmtBRL(n){return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function calcTotais(){const custo=parseFloat(document.getElementById('custo').value)||0,margem=parseFloat(document.getElementById('margem').value)||0;let tv=0,tc=0;pecas.forEach(p=>{const v=calcVol(p),vt=v*(parseFloat(p.quant)||0),pr=vt*custo;tv+=vt;tc+=pr;const el=document.getElementById('res-'+p.id);if(el){el.querySelector('.peca-result-vol').textContent=v>0?'Vol: '+vt.toFixed(6)+' m³':'—';el.querySelector('.peca-result-preco').textContent=pr>0?fmtBRL(pr):'—'}});const tve=tc*(1+margem/100);document.getElementById('total-vol').textContent=tv.toFixed(6)+' m³';document.getElementById('total-custo').textContent=fmtBRL(tc);document.getElementById('total-venda').textContent=fmtBRL(tve);document.getElementById('label-venda').textContent=margem>0?'Preço de Venda (+'+margem+'%)':'Preço de Venda'}
+function renderPecas(){const cont=document.getElementById('pecas-container');cont.innerHTML='';pecas.forEach((p,idx)=>{const card=document.createElement('div');card.className='peca-card';card.id='card-'+p.id;card.innerHTML='<div class="peca-header"><div class="peca-num">Peça '+String(idx+1).padStart(2,'0')+'</div><button class="btn-remove" onclick="removePeca('+p.id+')">×</button></div><div class="peca-row"><div class="peca-field"><div class="peca-label">Código</div><input class="peca-input" type="text" value="'+p.codigo+'" placeholder="001" oninput="updatePeca('+p.id+','codigo',this.value)"/></div><div class="peca-field"><div class="peca-label">Descrição</div><input class="peca-input" type="text" value="'+p.descr+'" placeholder="Tampa" oninput="updatePeca('+p.id+','descr',this.value)"/></div></div><div class="peca-row three"><div class="peca-field"><div class="peca-label">Alt (mm)</div><input class="peca-input dim" type="number" value="'+p.alt+'" placeholder="200" inputmode="decimal" oninput="updatePeca('+p.id+','alt',this.value)"/></div><div class="peca-field"><div class="peca-label">Larg (mm)</div><input class="peca-input dim" type="number" value="'+p.larg+'" placeholder="150" inputmode="decimal" oninput="updatePeca('+p.id+','larg',this.value)"/></div><div class="peca-field"><div class="peca-label">Esp (mm)</div><input class="peca-input dim" type="number" value="'+p.esp+'" placeholder="30" inputmode="decimal" oninput="updatePeca('+p.id+','esp',this.value)"/></div></div><div class="peca-row"><div class="peca-field"><div class="peca-label">Qtd</div><input class="peca-input" type="number" value="'+p.quant+'" min="1" inputmode="numeric" oninput="updatePeca('+p.id+','quant',this.value)"/></div><div id="res-'+p.id+'" class="peca-result"><div class="peca-result-vol">—</div><div class="peca-result-preco">—</div></div></div>';cont.appendChild(card)});calcTotais()}
+function salvarOrcamento(){const cliente=document.getElementById('cliente').value.trim()||'Cliente';const custo=parseFloat(document.getElementById('custo').value)||0,margem=parseFloat(document.getElementById('margem').value)||0;let tv=0,tc=0;pecas.forEach(p=>{const v=calcVol(p)*(parseFloat(p.quant)||0);tv+=v;tc+=v*custo});const tve=tc*(1+margem/100);if(tc===0){showToast('⚠ Preencha as dimensões!');return}const hist=JSON.parse(localStorage.getItem('isocat_hist')||'[]');hist.unshift({id:Date.now(),cliente,data:new Date().toLocaleDateString('pt-BR'),hora:new Date().toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),vol:tv,venda:tve,margem,pecas:pecas.length});localStorage.setItem('isocat_hist',JSON.stringify(hist.slice(0,100)));showToast('✓ Salvo!')}
+function limpar(){if(!confirm('Limpar?'))return;document.getElementById('cliente').value='';pecas=[];renderPecas()}
+function abrirHistorico(){const hist=JSON.parse(localStorage.getItem('isocat_hist')||'[]');const lista=document.getElementById('hist-lista');lista.innerHTML=hist.length===0?'<div class="empty-hist">Nenhum orçamento ainda.</div>':hist.map(h=>'<div class="hist-item"><div class="hist-cliente">'+h.cliente+'</div><div class="hist-meta">'+h.data+' · '+h.pecas+'pc · '+h.vol.toFixed(4)+'m³</div><div class="hist-preco">'+h.venda.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})+'</div></div>').join('');document.getElementById('modal-hist').style.display='flex'}
+function fecharHistorico(e){if(!e||e.target===document.getElementById('modal-hist'))document.getElementById('modal-hist').style.display='none'}
+function showToast(msg){const el=document.createElement('div');el.className='toast';el.textContent=msg;document.body.appendChild(el);setTimeout(()=>el.remove(),2600)}
+document.getElementById('custo').addEventListener('input',calcTotais);
+document.getElementById('margem').addEventListener('input',calcTotais);
+addPeca();
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+  </html>
